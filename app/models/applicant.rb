@@ -1,5 +1,6 @@
 class Applicant < ApplicationRecord
   has_many :zone_applications, dependent: :destroy
+  has_many :applications, through: :zone_applications
 
   # Give me all this applicant's lots, past present or future
   has_many :lots, through: :zone_applications

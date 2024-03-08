@@ -1,9 +1,6 @@
 class ApplicationRecord < ActiveRecord::Base
   primary_abstract_class
 
-  # Declare (and freeze) valid units of measure throughout the app. These are all stated in terms of US Imperial units.
-  VALID_UNITS_OF_MEASURE = %w[acres miles feet hectares kilometers yards km mi meters].freeze
-
   # In order to convert from any unit of measure to the other, we need a common "root" conversion factor. We'll use
   # meters as the common factor here for simplicity, converting every entry from whatever to meters, then from meters
   # to the other output unit. So to start that we need a table:
@@ -58,9 +55,4 @@ class ApplicationRecord < ActiveRecord::Base
       hectares: 100
     }
   }
-
-  # This method converts from acres to miles.
-  def self.acres_to_miles(acres)
-
-
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_07_054300) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_08_013847) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,6 +62,25 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_07_054300) do
     t.index ["unit_of_measure"], name: "index_lots_on_unit_of_measure"
     t.index ["width"], name: "index_lots_on_width"
     t.index ["zip"], name: "index_lots_on_zip"
+  end
+
+  create_table "zone_applications", force: :cascade do |t|
+    t.bigint "applicant_id", null: false
+    t.bigint "lot_id", null: false
+    t.bigint "lot_use_id", null: false
+    t.datetime "submitted_at"
+    t.datetime "approved_at"
+    t.text "notes"
+    t.jsonb "metadata"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["applicant_id", "lot_id", "lot_use_id"], name: "idx_on_applicant_id_lot_id_lot_use_id_27f7e7b74b", unique: true
+    t.index ["applicant_id"], name: "index_zone_applications_on_applicant_id"
+    t.index ["approved_at"], name: "index_zone_applications_on_approved_at"
+    t.index ["lot_id"], name: "index_zone_applications_on_lot_id"
+    t.index ["lot_use_id"], name: "index_zone_applications_on_lot_use_id"
+    t.index ["metadata"], name: "index_zone_applications_on_metadata", using: :gin
+    t.index ["submitted_at"], name: "index_zone_applications_on_submitted_at"
   end
 
 end

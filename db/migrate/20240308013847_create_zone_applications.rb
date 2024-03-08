@@ -1,6 +1,6 @@
 class CreateZoneApplications < ActiveRecord::Migration[7.1]
   def change
-    create_table :zone_applications, id: false do |t|
+    create_table :zone_applications do |t|
       t.belongs_to :applicant, null: false, index: true
       t.belongs_to :lot, null: false, index: true
       t.belongs_to :lot_use, null: false, index: true
